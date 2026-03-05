@@ -1,31 +1,15 @@
 import express from "express";
+import { Router } from 'express';
+import {
+    listarEventos
+} from '/service.js';
 
-import { EventosDatabase } from "./database/eventosDataBase.js";
-const db = new EventosDatabase()
 const app = express();
 const PORT = 3000;
-const eventos = db.listarTodos()
+const router = Router();
 
-function verificaListaVazia(array){
-   return array.length == 0;
-}
+router.get('/', listarEventos);
 
-
-// let dado1 = {titulo: "Festa na ARSAL", descricao: "leve seu prato", vagas: 5, vagasDisponiveis: 3, modalidade: "Presencial", cargaHoraria: 5, ativo: true}
-
-console.log(db.listarTodos());
-
-// Lista todos os eventos
-app.get("/",(req, res)=>{
-    verificaListaVazia(eventos) ? res.send("Lista sem conteúdo") : res.jso(eventos)
-})
-
-// Lista evento especifico
-app.get("/:id",(req,res)=>{
-    
-    res.send(verificaListaVazia())
-})
-
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`Servidor ligado na porta ${PORT}`);
 })
