@@ -1,8 +1,12 @@
 GET http://localhost:3000
 
 ####
-
-GET http://localhost:3000/teste
+GET http://localhost:3000/api
 
 ####
-GET http://localhost:3000/1
+GET http://localhost:3000/api/eventos
+
+####
+GET http://localhost:3000/api/eventos/1/cancelar
+####
+GET http://localhost:3000/api/eventos/1/inscricao

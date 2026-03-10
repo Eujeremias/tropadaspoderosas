@@ -10,5 +10,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/eventos', EventosController.getAllEvents);
+router.get('/eventos?vagasMin=:vagasMin', EventosController.getAllEvents);
+router.patch('/eventos/:id/cancelar', EventosController.cancelarEvento);
+router.post('/eventos/:id/inscricao', EventosController.inscricaoEvento);
 
 export { router as EventosRoutes };
