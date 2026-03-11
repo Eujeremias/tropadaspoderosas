@@ -2,11 +2,44 @@ import { EventosDatabase } from "../database/eventosDataBase.js";
 
 const db = new EventosDatabase();
 
-function verificaListaVazia(array) {
-    return array.length == 0;
-}
-
 class EventosController {
+
+    static async listarEventos(req,res,next){
+        try{
+            let eventos = db.listarTodos()
+            if(eventos.length === 0){
+                return res.status(404).json({message: "Nenhum evento cadastrado"})
+            }
+            res.json(eventos)
+        }catch(err){
+            next(err)
+        }
+    }
+
+    static async listarEventosPorId(req,res,next){
+        try{
+            const id = parseInt(req.params.id)
+            const eventos = db.listarTodos() || []
+
+            const evento = eventos.find(e=>e.id === id);
+
+            if(!evento){
+                res.status(404).json({message: `Evento de id: ${id} não encontrado`})
+            }
+            res.json(evento)
+        }catch(err){
+            next(err)
+        }
+    }
+
+    static async criarEvento(req, res, next) {
+        try {
+            const novoEvento = db.inserir(req.body);
+            res.status(201).json(novoEvento);
+        } catch (error) {
+            next(error);
+        }
+    }
 
     static async getAllEvents(req, res, next) {
         try {
@@ -53,9 +86,7 @@ class EventosController {
         } catch (err) {
             next(err);
         }
-    }   
-
-
+    }
 }
 
 export { EventosController };
