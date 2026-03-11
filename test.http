@@ -1,7 +1,20 @@
-GET http://localhost:3000
+### Listando todos elementos
+GET http://localhost:3000/eventos
 
-####
-GET http://localhost:3000/api
+### Criar evento
+POST http://localhost:3000/eventos
+Content-Type: application/json
+
+{
+    "titulo": "Evento Teste",
+    "descricao": "Descrição do evento",
+    "vagas": 50,
+    "modalidade": "presencial",
+    "cargaHoraria": 8
+}
+
+### Buscando evento por ID
+GET http://localhost:3000/eventos/2
 
 ####
 GET http://localhost:3000/api/eventos
