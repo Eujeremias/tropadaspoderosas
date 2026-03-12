@@ -10,6 +10,11 @@ router.post('/', EventosController.criarEvento);
 
 router.get('/:id', EventosController.listarEventosPorId);
 
+// Rotas Intermediárias - Atualizar | Remover | Listar Ativos
+
+router.put('/:id', EventosController.atualizarEvento);
+router.delete('/:id', EventosController.removerEvento);
+router.get('/ativos', EventosController.listarEventosAtivos);
 
 // Última Rotas - Filtrar por Vagas | Realiza Inscrição | Cancela Evento
 router.get('/filtrar', EventosController.getAllEvents);

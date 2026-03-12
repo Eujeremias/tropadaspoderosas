@@ -23,3 +23,18 @@ GET http://localhost:3000/api/eventos
 GET http://localhost:3000/api/eventos/1/cancelar
 ####
 GET http://localhost:3000/api/eventos/1/inscricao
+
+### Atualizar evento
+PUT http://localhost:3000/eventos/1
+Content-Type: application/json
+
+{
+  "titulo": "Workshop Atualizado",
+  "vagas": 50
+}
+
+### Remover evento
+DELETE http://localhost:3000/eventos/1
+
+### Listar ativos
+GET http://localhost:3000/eventos/ativos

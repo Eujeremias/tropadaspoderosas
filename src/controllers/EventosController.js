@@ -41,12 +41,12 @@ class EventosController {
         }
     }
     static async atualizarEvento(req, res, next) {
-    try {
-        const id = parseInt(req.params.id);
-        const evento = db.buscarPorId(id);
+        try {
+            const id = parseInt(req.params.id);
+            const evento = db.buscarPorId(id);
 
-        if (!evento) {
-            return res.status(404).json({ error: `Evento de id: ${id} não encontrado` });
+            if (!evento) {
+                return res.status(404).json({ error: `Evento de id: ${id} não encontrado` });
         }
 
         const eventoAtualizado = db.atualizar(id, req.body);
@@ -56,6 +56,35 @@ class EventosController {
     }
 }
 
+    static async removerEvento(req, res, next) {
+        try {
+            const id = parseInt(req.params.id);
+            const evento = db.buscarPorId(id);
+
+            if (!evento) {
+                return res.status(404).json({ error: `Evento de id: ${id} não encontrado` });
+        }
+
+        db.remover(id);
+        res.status(200).json({ message: `Evento de id: ${id} removido com sucesso` });
+    } catch (err) {
+        next(err);
+    }
+}
+
+    static async listarEventosAtivos(req, res, next) {
+        try {
+            const eventos = db.listarTodos().filter(e => e.ativo === true);
+
+            if (eventos.length === 0) {
+                return res.status(404).json({ message: "Nenhum evento ativo encontrado" });
+        }
+
+        res.json(eventos);
+    } catch (err) {
+        next(err);
+    }
+}
     static async getAllEvents(req, res, next) {
         try {
             let eventos = db.listarTodos();
